@@ -14,6 +14,7 @@ const MainApp = () => {
         theme={{
           colors: {
             primary: PRIMARY_COLOR,
+            error: 'red',
           },
         }}
       >
