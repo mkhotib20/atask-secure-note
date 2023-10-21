@@ -20,13 +20,13 @@ const DARKER_WHITE_OBJ: ColorObj = {
 };
 
 const PRIMARY_COLOR_OBJ: ColorObj = {
-  light: '#008170',
-  dark: '#555555',
+  light: '#0746a6',
+  dark: '#5d9af8',
 };
 
 const LIGHTER_BLACK_OBJ: ColorObj = {
-  light: '#555555',
-  dark: '#008170',
+  light: '#AAAAAA',
+  dark: '#777777',
 };
 
 const STATUS_BAR_THEME_OBJ: Record<ColorScheme, ColorScheme> = {
@@ -39,4 +39,5 @@ export const DEFAULT_WHITE = DEFAULT_WHITE_OBJ[CURRENT_SCHEME];
 export const DARKER_WHITE = DARKER_WHITE_OBJ[CURRENT_SCHEME];
 export const DEFAULT_BLACK = DEFAULT_BLACK_OBJ[CURRENT_SCHEME];
 export const PRIMARY_COLOR = PRIMARY_COLOR_OBJ[CURRENT_SCHEME];
+
 export const LIGHTER_BLACK = LIGHTER_BLACK_OBJ[CURRENT_SCHEME];

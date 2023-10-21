@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { RootNavigationProp } from '@/models/router/types';
-import { DARKER_WHITE, LIGHTER_BLACK, PRIMARY_COLOR } from '@/styles/colors';
+import { DARKER_WHITE, DEFAULT_BLACK, LIGHTER_BLACK, PRIMARY_COLOR } from '@/styles/colors';
 
 import type { NoteItemProps } from '../../model/types';
 
@@ -40,7 +40,7 @@ const NoteItem = ({ itemData }: NoteItemProps) => {
             </Text>
             <Text style={{ marginLeft: 'auto', fontSize: 12, color: LIGHTER_BLACK }}>{renderedDate}</Text>
           </View>
-          <Text ellipsizeMode="tail" numberOfLines={5}>
+          <Text ellipsizeMode="tail" numberOfLines={5} style={{ color: DEFAULT_BLACK }}>
             {itemData.content}
           </Text>
         </View>

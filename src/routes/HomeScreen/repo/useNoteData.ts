@@ -29,8 +29,10 @@ const useNoteData = () => {
 
   const parsedData = useMemo(() => {
     if (!keyword) return noteData;
+    const loweredKeyword = keyword.toLowerCase();
     return noteData.filter(
-      (note) => note.title.toLowerCase().includes(keyword) || note.content.toLowerCase().includes(keyword),
+      (note) =>
+        note.title.toLowerCase().includes(loweredKeyword) || note.content.toLowerCase().includes(loweredKeyword),
     );
   }, [keyword, noteData]);
 

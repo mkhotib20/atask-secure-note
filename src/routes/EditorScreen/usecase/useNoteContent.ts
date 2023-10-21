@@ -3,7 +3,6 @@ import { Alert } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-import useBeforeLeave from '@/hooks/useBeforeLeave';
 import { Note } from '@/models/note/types';
 import { RootNavigationProp, RootStackRouteProp } from '@/models/router/types';
 
@@ -16,22 +15,17 @@ const useNoteContent = () => {
 
   const [noteContent, setNoteContent] = useState(data.content || '');
   const [noteTitle, setNoteTitle] = useState(data.title || '');
-  const [hasUnsaved, setHasUnsaved] = useState(false);
-  const { handleUpsert, handleDelete } = useNoteMutation();
 
-  useBeforeLeave(hasUnsaved);
+  const { handleUpsert, handleDelete } = useNoteMutation();
 
   const handleChangeTitle = (text: string) => {
     setNoteTitle(text);
-    setHasUnsaved(true);
   };
   const handleChangeContent = (text: string) => {
     setNoteContent(text);
-    setHasUnsaved(true);
   };
 
   const handleSave = useCallback(() => {
-    setHasUnsaved(false);
     handleUpsert({
       content: noteContent,
       id: data.id,
@@ -54,7 +48,6 @@ const useNoteContent = () => {
       },
       {
         onPress: () => {
-          setHasUnsaved(false);
           if (!data.id) {
             return;
           }

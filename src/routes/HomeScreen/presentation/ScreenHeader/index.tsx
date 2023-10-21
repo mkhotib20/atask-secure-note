@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableNativeFeedback, View } from 'react-native';
+import { Platform, TouchableNativeFeedback, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -20,9 +20,14 @@ const ScreenHeader = () => {
   return (
     <View style={styles.screenWrapper}>
       <Text style={styles.screenTextTitle}>Secret Note</Text>
-      <TouchableNativeFeedback onPress={handlePressAdd}>
-        <MaterialCommunityIcons color={PRIMARY_COLOR} style={{ marginLeft: 'auto' }} name="plus" size={24} />
-      </TouchableNativeFeedback>
+      {Platform.OS === 'ios' && (
+        <TouchableNativeFeedback onPress={handlePressAdd}>
+          <View style={{ marginLeft: 'auto', flexDirection: 'row', alignItems: 'center' }}>
+            <MaterialCommunityIcons color={PRIMARY_COLOR} name="plus" size={24} />
+            <Text style={{ color: PRIMARY_COLOR }}>Add</Text>
+          </View>
+        </TouchableNativeFeedback>
+      )}
     </View>
   );
 };

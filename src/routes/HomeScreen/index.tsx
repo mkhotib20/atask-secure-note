@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Platform, RefreshControl, SafeAreaView, Text, View } from 'react-native';
+import { FlatList, Platform, RefreshControl, SafeAreaView, View } from 'react-native';
 import { FAB } from 'react-native-paper';
 
 import { useNavigation } from '@react-navigation/native';
@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { RootNavigationProp } from '@/models/router/types';
 import { DEFAULT_WHITE } from '@/styles/colors';
 
+import NotFound from './presentation/NotFound';
 import NoteItem from './presentation/NoteItem';
 import ScreenHeader from './presentation/ScreenHeader';
 import SearchBar from './presentation/SearchBar';
@@ -19,7 +20,6 @@ const HomeScreen = () => {
 
   const handleAdd = () => {
     push('EditorScreen');
-    console.log('sda');
   };
 
   return (
@@ -31,8 +31,7 @@ const HomeScreen = () => {
         <ScreenHeader />
         <SearchBar keyword={keyword} setKeyword={setKeyword} />
       </View>
-
-      {!noteData.length && <Text style={{ textAlign: 'center' }}>No notes yet!</Text>}
+      {!noteData.length && <NotFound onCreateNew={handleAdd} keyword={keyword} />}
       <FlatList
         style={{ paddingHorizontal: 20 }}
         refreshControl={<RefreshControl refreshing={false} onRefresh={fetchData} />}

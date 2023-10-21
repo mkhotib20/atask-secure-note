@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 import { TextInput, View } from 'react-native';
 
-import { DEFAULT_WHITE } from '@/styles/colors';
+import { DEFAULT_WHITE, LIGHTER_BLACK } from '@/styles/colors';
 
+import { styles } from './styles';
 import useHeaderOptions from './usecase/useHeaderOptions';
 import useNoteContent from './usecase/useNoteContent';
 
@@ -32,9 +33,10 @@ const EditorScreen = () => {
         autoFocus
         value={noteTitle}
         onChangeText={handleChangeTitle}
-        style={{ fontSize: 24, padding: 20 }}
+        style={styles.editorTitle}
         placeholder="Title"
         textAlignVertical="top"
+        placeholderTextColor={LIGHTER_BLACK}
         onSubmitEditing={() => {
           editorRef.current?.focus();
         }}
@@ -44,8 +46,9 @@ const EditorScreen = () => {
         ref={editorRef}
         value={noteContent}
         onChangeText={handleChangeContent}
-        style={{ height: '100%', lineHeight: 24, padding: 20, paddingBottom: 52 }}
+        style={styles.editorText}
         placeholder="Pur your thoughts"
+        placeholderTextColor={LIGHTER_BLACK}
         textAlignVertical="top"
       />
     </View>

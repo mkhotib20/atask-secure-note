@@ -14,6 +14,7 @@ const SearchBar = ({ keyword, setKeyword }: SearchBarProps) => {
         borderRadius: 8,
         flexDirection: 'row',
         alignItems: 'center',
+        paddingHorizontal: 10,
       }}
     >
       <TextInput
@@ -23,14 +24,9 @@ const SearchBar = ({ keyword, setKeyword }: SearchBarProps) => {
         returnKeyType="search"
         returnKeyLabel="search"
         placeholder="Search"
-        style={{ height: 48, paddingHorizontal: 16 }}
+        style={{ height: 48, flex: 1 }}
       />
-      <MaterialCommunityIcons
-        color={LIGHTER_BLACK}
-        size={24}
-        style={{ marginLeft: 'auto', marginRight: 10 }}
-        name="magnify"
-      />
+      <MaterialCommunityIcons color={LIGHTER_BLACK} size={24} name="magnify" />
     </View>
   );
 };

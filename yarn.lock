@@ -1936,6 +1936,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/isaac@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/@types/isaac/-/isaac-0.0.1.tgz#845e360790cb2498113d80b8a406c55ccc1a0f4c"
+  integrity sha512-ZhR4AaLS0qP0CtbNBhB/athVFGtrlTlm6JIfwBs/+MClo94AG44N4zBmhPQqSxT4aG72XNBAkPoeBTym/TNOEQ==
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.5"
   resolved "https://registry.npmjs.org/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.5.tgz#fdfdd69fa16d530047d9963635bd77c71a08c068"
@@ -4171,6 +4176,11 @@ is-wsl@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/is-wsl/-/is-wsl-1.1.0.tgz#1f16e4aa22b04d1336b66188a66af3c600c3a66d"
   integrity sha512-gfygJYZ2gLTDlmbWMI0CE2MwnFzSN/2SZfkMlItC4K/JBlsWVDB0bO6XhqcY13YXE7iMcAJnzTCJjPiTeJJ0Mw==
+
+isaac@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.npmjs.org/isaac/-/isaac-0.0.5.tgz#a4f292229a8bdf6e33900a3eb8b4201a57ff2d89"
+  integrity sha512-KVtdbh4E0xebBIyGjVdEUyBAJ6QmfD5Q2jZXalthodNc5DeHg6ByvoymLSAAWPpZ6MjrcyZLuw8+u5dj1LbBLg==
 
 isarray@^2.0.5:
   version "2.0.5"

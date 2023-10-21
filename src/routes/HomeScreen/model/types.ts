@@ -10,3 +10,8 @@ export interface SearchBarProps {
   keyword: string;
   setKeyword: Dispatch<SetStateAction<string>>;
 }
+
+export interface NotfoundProps {
+  keyword?: string;
+  onCreateNew: () => void;
+}

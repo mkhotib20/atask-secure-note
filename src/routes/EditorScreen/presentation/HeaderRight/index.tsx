@@ -11,11 +11,11 @@ const HeaderRight = ({ onSave, isEdit, onDelete }: HeaderRightProps) => {
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       {isEdit && (
         <TouchableNativeFeedback onPress={onDelete}>
-          <MaterialCommunityIcons style={{ marginRight: 10 }} color={PRIMARY_COLOR} name="delete-outline" size={20} />
+          <MaterialCommunityIcons style={{ marginRight: 32 }} color={PRIMARY_COLOR} name="delete-outline" size={24} />
         </TouchableNativeFeedback>
       )}
       <TouchableNativeFeedback onPress={onSave}>
-        <MaterialCommunityIcons color={PRIMARY_COLOR} name="check" size={20} />
+        <MaterialCommunityIcons color={PRIMARY_COLOR} name="check" size={24} />
       </TouchableNativeFeedback>
     </View>
   );

@@ -4,4 +4,5 @@ export interface AuthContextType {
   mmkvInstance?: MMKV;
   authenticated: boolean;
   passwordAuthenticate: (password: string) => void;
+  encryptionKey?: string;
 }
