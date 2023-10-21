@@ -19,21 +19,27 @@ const usePasswordLogin = () => {
   const [loading, setLoading] = useState(false);
 
   const handleNewUser = async (password: string) => {
-    // Generate UUID for user unique encryption key
-    const username = uuid.v4().toString();
-    const hashedPassword = bcrypt.hashSync(password, 10);
-    // Store to RSA for biometric
-
-    await setGenericPassword(username, hashedPassword, {
-      storage: STORAGE_TYPE.RSA,
-      service: 'biometric',
-    });
-    // Store to KeyChain for plain text password
-    await setGenericPassword(username, hashedPassword, {
-      storage: STORAGE_TYPE.KC,
-      service: 'password',
-    });
-    attemptLogin(username);
+    try {
+      const biometricResult = await getSupportedBiometryType();
+      // Generate UUID for user unique encryption key
+      const username = uuid.v4().toString();
+      const hashedPassword = bcrypt.hashSync(password, 10);
+      // Store to RSA for biometric, only if user has biometric support
+      if (biometricResult) {
+        await setGenericPassword(username, hashedPassword, {
+          storage: STORAGE_TYPE.RSA,
+          service: 'biometric',
+        });
+      }
+      // Store to KeyChain for plain text password
+      await setGenericPassword(username, hashedPassword, {
+        storage: STORAGE_TYPE.KC,
+        service: 'password',
+      });
+      attemptLogin(username);
+    } catch (error) {
+      console.log(JSON.stringify(error));
+    }
   };
 
   const handleLogin = async (rawPassword: string) => {
