@@ -1,4 +1,5 @@
 import React from 'react';
+import BootSplash from 'react-native-bootsplash';
 import { PaperProvider } from 'react-native-paper';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,7 +10,11 @@ import { PRIMARY_COLOR } from './styles/colors';
 
 const MainApp = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      onReady={() => {
+        BootSplash.hide();
+      }}
+    >
       <PaperProvider
         theme={{
           colors: {
