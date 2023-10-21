@@ -21,6 +21,7 @@ const usePasswordLogin = () => {
   const handleNewUser = async (password: string) => {
     try {
       const biometricResult = await getSupportedBiometryType();
+
       // Generate UUID for user unique encryption key
       const username = uuid.v4().toString();
       const hashedPassword = bcrypt.hashSync(password, 10);
@@ -53,7 +54,8 @@ const usePasswordLogin = () => {
       // if no password retrieved at the first open, set password to keychain
 
       if (!passwordRetrieved) {
-        return handleNewUser(rawPassword);
+        await handleNewUser(rawPassword);
+        return;
       }
       const { password, username } = passwordRetrieved;
 
@@ -92,6 +94,7 @@ const usePasswordLogin = () => {
         accessible: ACCESSIBLE.ALWAYS,
         service: 'biometric',
       });
+      console.log(credential);
 
       if (!credential) {
         return;
