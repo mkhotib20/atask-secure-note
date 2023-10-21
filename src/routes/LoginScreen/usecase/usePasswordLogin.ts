@@ -10,14 +10,32 @@ import {
   getSupportedBiometryType,
   setGenericPassword,
 } from 'react-native-keychain';
+import uuid from 'react-native-uuid';
 
 import useAuth from '@/context/auth/hooks/useAuth';
 
 const usePasswordLogin = () => {
-  const { passwordAuthenticate } = useAuth();
+  const { attemptLogin } = useAuth();
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (password: string) => {
+  const handleNewUser = async (password: string) => {
+    // Generate UUID for user unique encryption key
+    const username = uuid.v4().toString();
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    // Store to RSA for biometric
+    await setGenericPassword(username, hashedPassword, {
+      storage: STORAGE_TYPE.RSA,
+      service: 'biometric',
+    });
+    // Store to KeyChain for plain text password
+    await setGenericPassword(username, hashedPassword, {
+      storage: STORAGE_TYPE.KC,
+      service: 'password',
+    });
+    attemptLogin(username);
+  };
+
+  const handleLogin = async (rawPassword: string) => {
     setLoading(true);
     try {
       const passwordRetrieved = await getGenericPassword({
@@ -25,32 +43,24 @@ const usePasswordLogin = () => {
         storage: STORAGE_TYPE.KC,
       });
 
-      console.log(passwordRetrieved);
-
       // if no password retrieved at the first open, set password to keychain
 
       if (!passwordRetrieved) {
-        const hashedPassword = bcrypt.hashSync(password, 10);
-        // Store to RSA for biometric
-        await setGenericPassword('secret-note', hashedPassword, {
-          storage: STORAGE_TYPE.RSA,
-          service: 'biometric',
-        });
-        // Store to KeyChain for plain text password
-        await setGenericPassword('secret-note', hashedPassword, {
-          storage: STORAGE_TYPE.KC,
-          service: 'password',
-        });
-        passwordAuthenticate(hashedPassword);
-      } else {
-        if (!bcrypt.compareSync(password, passwordRetrieved.password)) {
-          Alert.alert('Auth Failed', "Password doesn't match!!");
-          return;
-        }
-        passwordAuthenticate(passwordRetrieved.password);
+        return handleNewUser(rawPassword);
       }
+      const { password, username } = passwordRetrieved;
+
+      const isPasswordMatch = bcrypt.compareSync(rawPassword, password);
+
+      if (!isPasswordMatch) {
+        Alert.alert('Auth Failed', "Password doesn't match!!");
+        return;
+      }
+
+      attemptLogin(username);
     } catch (error) {
       console.error(error);
+      Alert.alert('Internal Error', 'Oops, something went wrong. Please try again later');
     } finally {
       setLoading(false);
     }
@@ -78,14 +88,15 @@ const usePasswordLogin = () => {
       if (!credential) {
         return;
       }
-      const { password } = credential;
 
-      // Means user has been verified and no need to input password
-      passwordAuthenticate(password);
+      const { username } = credential;
+
+      // Means user has been verified and no need to input username
+      attemptLogin(username);
     } catch (error) {
       // do nothing
     }
-  }, [passwordAuthenticate]);
+  }, [attemptLogin]);
 
   useEffect(() => {
     authenticateBiometric();

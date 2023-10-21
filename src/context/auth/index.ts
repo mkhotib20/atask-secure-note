@@ -4,7 +4,7 @@ import type { AuthContextType } from './model/types';
 
 const AuthContext = createContext<AuthContextType>({
   authenticated: false,
-  passwordAuthenticate: () => {},
+  attemptLogin: () => {},
 });
 
 export default AuthContext;

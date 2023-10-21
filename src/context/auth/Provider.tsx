@@ -9,23 +9,23 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
 
   const constructMmkv = useCallback((encryptionKey: string) => {
     const instance = new MMKV({
+      id: 'secret-notes',
       encryptionKey,
-      id: 'notes',
     });
 
     mmkvInstance.current = instance;
     setAuthenticated(true);
   }, []);
 
-  const passwordAuthenticate = useCallback(
-    (password: string) => {
-      constructMmkv(password);
+  const attemptLogin = useCallback(
+    (userID: string) => {
+      constructMmkv(userID);
     },
     [constructMmkv],
   );
 
   return (
-    <AuthContext.Provider value={{ passwordAuthenticate, authenticated, mmkvInstance: mmkvInstance.current }}>
+    <AuthContext.Provider value={{ attemptLogin, authenticated, mmkvInstance: mmkvInstance.current }}>
       {children}
     </AuthContext.Provider>
   );

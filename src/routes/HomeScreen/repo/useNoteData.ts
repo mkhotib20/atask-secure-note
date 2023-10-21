@@ -14,9 +14,11 @@ const useNoteData = () => {
 
   const fetchData = useCallback(() => {
     const result = get(NOTE_STORAGE_KEY);
+
     if (!result) {
       return;
     }
+
     setNoteData(JSON.parse(result));
   }, [get]);
 
