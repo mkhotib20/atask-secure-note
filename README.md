@@ -28,6 +28,13 @@
    - Flexibility: The library provides great flexibility in terms of navigation patterns and transitions, allowing you to create a navigation structure tailored to your app's specific needs.
    - Large User Base: Due to its popularity and extensive use in the community, you can find a wealth of resources, documentation, and community support, making it easier to troubleshoot issues and implement advanced navigation features.
 
+# Unit Test Coverage
+
+I was focused in login usecase test cases, it contains crucial business logic for authentication, and the business logic has been locked with unit test. This unit test is supposed to prevent unexpected logic changes when engineer modify the code
+
+Here's the unit test coverage :
+![UT Coverage](screenshoots/ut-coverage.png)
+
 # Pre-Requisites
 
 - Please tak a note to use yarn for package manager, because the lock file is in yarn. If you're using different package manager, perhaps the dependency version will broken

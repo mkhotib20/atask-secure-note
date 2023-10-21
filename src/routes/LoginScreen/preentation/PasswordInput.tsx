@@ -22,6 +22,7 @@ const PasswordInput = ({ isPasswordStrong, loading, pwd, setPwd, handlePressLogi
         mode="outlined"
         right={
           <TextInput.Icon
+            testID={passwordVisible ? 'eyeClose' : 'eyeOpen'}
             onPress={() => setPasswordVisible((prev) => !prev)}
             color={LIGHTER_BLACK}
             icon={passwordVisible ? 'eye-off' : 'eye'}

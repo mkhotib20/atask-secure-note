@@ -48,6 +48,30 @@ describe('Login Screen Test', () => {
     jest.clearAllMocks();
   });
 
+  it('should show password if press eye icon', async () => {
+    render(<App />);
+    const eyeOpenBtn = await screen.findByTestId('eyeOpen');
+    fireEvent(eyeOpenBtn, 'press');
+    expect(await screen.findByPlaceholderText('Input Password')).toHaveProp('secureTextEntry', false);
+
+    const eyeCloseBtn = await screen.findByTestId('eyeClose');
+    expect(eyeCloseBtn).toBeOnTheScreen();
+    fireEvent(eyeCloseBtn, 'press');
+    expect(await screen.findByTestId('eyeOpen')).toBeOnTheScreen();
+
+    expect(await screen.findByPlaceholderText('Input Password')).toHaveProp('secureTextEntry', true);
+  });
+
+  it('should render correctly new user and store the password', async () => {
+    const mockGetGenericPwd = jest.spyOn(keychain, 'getGenericPassword');
+    mockGetGenericPwd.mockImplementation(async () => {
+      return false;
+    });
+
+    await setupAndSimulateInput('October2023');
+    expect(screen.queryByText('Create New')).toBeDefined();
+  });
+
   it('should render correctly and user login with correct password', async () => {
     await setupAndSimulateInput('October2023');
     expect(screen.queryByText('Create New')).toBeDefined();
@@ -89,6 +113,21 @@ describe('Login Screen Test', () => {
     });
     render(<App />);
 
+    expect(screen.queryByText('Create New')).toBeDefined();
+  });
+
+  it('should render correctly new user and store the password, and setup the biometrics auth', async () => {
+    const mockGetGenericPwd = jest.spyOn(keychain, 'getGenericPassword');
+    mockGetGenericPwd.mockImplementation(async () => {
+      return false;
+    });
+
+    const mockGetSupportedBiometryType = jest.spyOn(keychain, 'getSupportedBiometryType');
+    mockGetSupportedBiometryType.mockImplementation(async () => {
+      return keychain.BIOMETRY_TYPE.FINGERPRINT;
+    });
+
+    await setupAndSimulateInput('October2023');
     expect(screen.queryByText('Create New')).toBeDefined();
   });
 });
