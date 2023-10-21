@@ -1,0 +1,3 @@
+# rename this to local.properties and put your own absolute path of sdk dir
+# eg : /Users/username/Library/Android/sdk/
+sdk.dir=/Users/khotib/Library/Android/sdk/
