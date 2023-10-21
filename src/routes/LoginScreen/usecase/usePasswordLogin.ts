@@ -34,7 +34,6 @@ const usePasswordLogin = () => {
       }
       // Store to KeyChain for plain text password
       await setGenericPassword(username, hashedPassword, {
-        storage: STORAGE_TYPE.KC,
         service: 'password',
       });
       attemptLogin(username);
@@ -48,7 +47,6 @@ const usePasswordLogin = () => {
     try {
       const passwordRetrieved = await getGenericPassword({
         service: 'password',
-        storage: STORAGE_TYPE.KC,
       });
 
       // if no password retrieved at the first open, set password to keychain
