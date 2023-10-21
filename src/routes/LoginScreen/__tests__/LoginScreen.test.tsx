@@ -10,10 +10,9 @@ import '@testing-library/jest-native/extend-expect';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 
 import App from '@/App';
+import { BCRYPTED_PASSWORD } from '@/__mock_data__/pwd';
 
 jest.mock('react-native-keychain');
-
-const BCRYPTED_PASSWORD = '$2a$10$/4.eCjFNDEegZU1dZtbJ4usg4d6XXK6c.dunPd/0wG5VBDb9o2jOK';
 
 const setupAndSimulateInput = async (userInput: string) => {
   render(<App />);

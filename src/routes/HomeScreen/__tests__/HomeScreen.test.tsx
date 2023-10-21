@@ -1,19 +1,23 @@
 import React from 'react';
 import 'react-native';
+import { Alert } from 'react-native';
 import * as keychain from 'react-native-keychain';
 import { act } from 'react-test-renderer';
 
 import '@testing-library/jest-native/extend-expect';
 import { fireEvent, render, screen } from '@testing-library/react-native';
 
+import App from '@/App';
+import { BCRYPTED_PASSWORD } from '@/__mock_data__/pwd';
+
 jest.mock('react-native-keychain');
 
 const renderApp = () => {
   // make all test case encapsulated
-  const App = require('@/App').default;
+
   render(<App />);
 };
-const BCRYPTED_PASSWORD = '$2a$10$/4.eCjFNDEegZU1dZtbJ4usg4d6XXK6c.dunPd/0wG5VBDb9o2jOK';
+
 describe('Homescreen Test', () => {
   beforeEach(() => {
     const getGenericPasswordMock = jest.spyOn(keychain, 'getGenericPassword');
@@ -27,6 +31,8 @@ describe('Homescreen Test', () => {
   });
 
   it('Create new notes with empty state and edit note if press note', async () => {
+    const alertSpy = jest.spyOn(Alert, 'alert');
+
     // Always start from app, so that the context is included
     renderApp();
 
@@ -70,5 +76,35 @@ describe('Homescreen Test', () => {
     const deleteButton = await screen.findByTestId('deleteButton');
 
     expect(deleteButton).toBeOnTheScreen();
+
+    const titleEditInput = await screen.findByPlaceholderText('Title');
+    expect(titleEditInput).toBeOnTheScreen();
+
+    fireEvent(titleEditInput, 'changeText', 'I edit this note');
+
+    const updateSaveBtn = await screen.findByTestId('saveButton');
+    expect(updateSaveBtn).toBeOnTheScreen();
+    fireEvent(updateSaveBtn, 'press');
+
+    const myUpdatedNoteListed = await screen.findByText('I edit this note');
+    expect(myUpdatedNoteListed).toBeOnTheScreen();
+
+    fireEvent(myUpdatedNoteListed, 'press');
+
+    const buttonToDelete = await screen.findByTestId('deleteButton');
+
+    act(() => {
+      fireEvent(buttonToDelete, 'press');
+    });
+    const [currentCall] = alertSpy.mock.calls;
+    // Show prompt before delete
+    expect(currentCall[1]).toBe('Are you sure want to delete this note?');
+    const [_cancelBtn, okBtn] = currentCall[2] || [];
+    if (typeof okBtn?.onPress === 'function') {
+      okBtn.onPress();
+    }
+
+    const homescreenCreateNewAfterDelete = await screen.findByText('Create New');
+    expect(homescreenCreateNewAfterDelete).toBeOnTheScreen();
   });
 });
