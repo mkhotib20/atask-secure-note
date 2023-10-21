@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, View } from 'react-native';
+import { Image, KeyboardAvoidingView, Platform, View } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 
 import { DEFAULT_BLACK, DEFAULT_WHITE } from '@/styles/colors';
@@ -18,7 +18,8 @@ const LoginScreen = () => {
   return (
     <KeyboardAvoidingView behavior={Platform.select({ ios: 'padding', android: 'height' })}>
       <View style={styles.passwordWrapper}>
-        <Text style={{ marginBottom: 20, color: DEFAULT_BLACK }}>Input password</Text>
+        <Image style={{ width: 200, resizeMode: 'contain' }} source={require('@/assets/logoipsum.png')} />
+        <Text style={{ marginBottom: 32, color: DEFAULT_BLACK }}>Welcome to Secret Note</Text>
         <TextInput
           disabled={loading}
           value={pwd}
@@ -26,8 +27,8 @@ const LoginScreen = () => {
           onSubmitEditing={handlePressLogin}
           secureTextEntry
           style={{ width: '100%' }}
-          textColor={DEFAULT_BLACK}
           mode="outlined"
+          textColor={DEFAULT_BLACK}
           placeholder="Input Password"
         />
         <Button

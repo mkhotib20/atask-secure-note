@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, TouchableNativeFeedback, View } from 'react-native';
+import { Image, Platform, TouchableNativeFeedback, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -19,7 +19,7 @@ const ScreenHeader = () => {
 
   return (
     <View style={styles.screenWrapper}>
-      <Text style={styles.screenTextTitle}>Secret Note</Text>
+      <Image style={{ width: 100, resizeMode: 'contain', height: 20 }} source={require('@/assets/logoipsum.png')} />
       {Platform.OS === 'ios' && (
         <TouchableNativeFeedback onPress={handlePressAdd}>
           <View style={{ marginLeft: 'auto', flexDirection: 'row', alignItems: 'center' }}>

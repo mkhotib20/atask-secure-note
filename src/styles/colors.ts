@@ -25,8 +25,8 @@ const PRIMARY_COLOR_OBJ: ColorObj = {
 };
 
 const LIGHTER_BLACK_OBJ: ColorObj = {
-  light: '#AAAAAA',
-  dark: '#777777',
+  light: '#777777',
+  dark: '#AAAAAA',
 };
 
 const STATUS_BAR_THEME_OBJ: Record<ColorScheme, ColorScheme> = {

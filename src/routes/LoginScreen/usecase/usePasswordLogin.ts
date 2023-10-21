@@ -91,7 +91,7 @@ const usePasswordLogin = () => {
         return;
       }
 
-      const { username, password } = credential;
+      const { username } = credential;
 
       // Means user has been verified and no need to input username
       attemptLogin(username);
