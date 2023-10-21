@@ -30,9 +30,11 @@ const PasswordInput = ({ isPasswordStrong, loading, pwd, setPwd, handlePressLogi
         textColor={DEFAULT_BLACK}
         placeholder="Input Password"
       />
-      <HelperText type="error" visible={!isPasswordStrong}>
-        Password is not strong enough
-      </HelperText>
+      {!isPasswordStrong && (
+        <HelperText type="error" visible>
+          Password is not strong enough
+        </HelperText>
+      )}
     </>
   );
 };

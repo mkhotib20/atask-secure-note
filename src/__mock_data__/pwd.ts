@@ -1,1 +1,1 @@
-export const BCRYPTED_PASSWORD = '$2a$10$/4.eCjFNDEegZU1dZtbJ4usg4d6XXK6c.dunPd/0wG5VBDb9o2jOK';
+export const BCRYPTED_PASSWORD = '$2a$10$AZgpBd7VF.7jqs8BDFNwCeW/M8LZNaNzlg9OuEbTikDLOxxnqh8We';

@@ -15,6 +15,7 @@ import { BCRYPTED_PASSWORD } from '@/__mock_data__/pwd';
 jest.mock('react-native-keychain');
 
 const setupAndSimulateInput = async (userInput: string) => {
+  jest.spyOn(Alert, 'alert');
   render(<App />);
 
   const passwordInput = await screen.findByPlaceholderText('Input Password');
@@ -33,7 +34,6 @@ const setupAndSimulateInput = async (userInput: string) => {
 
 describe('Login Screen Test', () => {
   beforeEach(() => {
-    jest.spyOn(Alert, 'alert');
     const getGenericPasswordMock = jest.spyOn(keychain, 'getGenericPassword');
 
     getGenericPasswordMock.mockImplementation(async () => ({
@@ -49,12 +49,18 @@ describe('Login Screen Test', () => {
   });
 
   it('should render correctly and user login with correct password', async () => {
-    await setupAndSimulateInput('123');
+    await setupAndSimulateInput('October2023');
     expect(screen.queryByText('Create New')).toBeDefined();
   });
 
+  it('should show password not strong for weak password', async () => {
+    await setupAndSimulateInput('weak');
+    expect(await screen.findByText('Password is not strong enough')).toBeDefined();
+    expect(await screen.findByText('Login')).toBeDisabled();
+  });
+
   it('Should show alert if user input wrong password', async () => {
-    await setupAndSimulateInput('312123213');
+    await setupAndSimulateInput('WrongPassword2023');
 
     await waitFor(() => {
       expect(Alert.alert).toHaveBeenCalledWith('Auth Failed', "Password doesn't match!!");
@@ -69,7 +75,7 @@ describe('Login Screen Test', () => {
       return Promise.reject(new Error('Mock Error'));
     });
 
-    await setupAndSimulateInput('312123213');
+    await setupAndSimulateInput('October2023');
 
     await waitFor(() => {
       expect(Alert.alert).toHaveBeenCalledWith('Internal Error', 'Oops, something went wrong. Please try again later');

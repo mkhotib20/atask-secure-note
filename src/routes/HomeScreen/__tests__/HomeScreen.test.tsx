@@ -30,6 +30,10 @@ describe('Homescreen Test', () => {
     }));
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('Create new notes with empty state and edit note if press note', async () => {
     const alertSpy = jest.spyOn(Alert, 'alert');
 
@@ -39,10 +43,14 @@ describe('Homescreen Test', () => {
     const passwordInput = await screen.findByPlaceholderText('Input Password');
     expect(passwordInput).toBeOnTheScreen();
 
-    fireEvent(passwordInput, 'changeText', '123');
+    act(() => {
+      fireEvent(passwordInput, 'changeText', 'October2023');
+    });
 
     const loginBtn = await screen.findByText('Login');
+
     expect(loginBtn).toBeOnTheScreen();
+
     act(() => {
       fireEvent(loginBtn, 'press');
     });

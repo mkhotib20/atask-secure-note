@@ -58,9 +58,9 @@ const usePasswordLogin = () => {
       const { password, username } = passwordRetrieved;
 
       const isPasswordMatch = bcrypt.compareSync(rawPassword, password);
+      console.log(isPasswordMatch, 'dsadsaojasdoaosdjdas');
 
       if (!isPasswordMatch) {
-        console.log(isPasswordMatch, 'dsjaojodasjodsajosadjosadjo');
         Alert.alert('Auth Failed', "Password doesn't match!!");
         return;
       }
@@ -92,7 +92,6 @@ const usePasswordLogin = () => {
         accessible: ACCESSIBLE.ALWAYS,
         service: 'biometric',
       });
-      console.log(credential);
 
       if (!credential) {
         return;
