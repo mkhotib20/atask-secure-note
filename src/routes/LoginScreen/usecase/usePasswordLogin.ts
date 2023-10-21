@@ -23,6 +23,7 @@ const usePasswordLogin = () => {
     const username = uuid.v4().toString();
     const hashedPassword = bcrypt.hashSync(password, 10);
     // Store to RSA for biometric
+
     await setGenericPassword(username, hashedPassword, {
       storage: STORAGE_TYPE.RSA,
       service: 'biometric',
@@ -53,6 +54,7 @@ const usePasswordLogin = () => {
       const isPasswordMatch = bcrypt.compareSync(rawPassword, password);
 
       if (!isPasswordMatch) {
+        console.log(isPasswordMatch, 'dsjaojodasjodsajosadjosadjo');
         Alert.alert('Auth Failed', "Password doesn't match!!");
         return;
       }
@@ -89,7 +91,7 @@ const usePasswordLogin = () => {
         return;
       }
 
-      const { username } = credential;
+      const { username, password } = credential;
 
       // Means user has been verified and no need to input username
       attemptLogin(username);

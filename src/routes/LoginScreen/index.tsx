@@ -18,7 +18,7 @@ const LoginScreen = () => {
   return (
     <KeyboardAvoidingView behavior={Platform.select({ ios: 'padding', android: 'height' })}>
       <View style={styles.passwordWrapper}>
-        <Text style={{ marginBottom: 20, color: DEFAULT_BLACK }}>Input password to open Secret Note</Text>
+        <Text style={{ marginBottom: 20, color: DEFAULT_BLACK }}>Input password</Text>
         <TextInput
           disabled={loading}
           value={pwd}

@@ -47,7 +47,7 @@ const EditorScreen = () => {
         value={noteContent}
         onChangeText={handleChangeContent}
         style={styles.editorText}
-        placeholder="Pur your thoughts"
+        placeholder="Pour your thoughts"
         placeholderTextColor={LIGHTER_BLACK}
         textAlignVertical="top"
       />
