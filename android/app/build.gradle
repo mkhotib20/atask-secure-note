@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.secretnote"
+    namespace "me.mkhotib.secretnote"
     defaultConfig {
-        applicationId "com.secretnote"
+        applicationId "me.mkhotib.secretnote"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -123,8 +123,8 @@ dependencies {
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 
 // TODO: Then
-// project.ext.vectoricons = [
-//     iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf' ] // Name of the font files you want to copy
-// ]
+project.ext.vectoricons = [
+    iconFontNames: [ 'MaterialCommunityIcons.ttf' ]
+]
 
 apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle");
