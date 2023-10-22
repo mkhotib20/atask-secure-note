@@ -80,32 +80,25 @@ const usePasswordLogin = () => {
     if (!biometryType) {
       return;
     }
+    const credential = await getGenericPassword({
+      accessControl: ACCESS_CONTROL.BIOMETRY_ANY,
+      authenticationPrompt: {
+        title: 'Login',
+        description: 'Login to secret note',
+      },
+      authenticationType: AUTHENTICATION_TYPE.BIOMETRICS,
+      accessible: ACCESSIBLE.ALWAYS,
+      service: 'biometric',
+    });
 
-    try {
-      const credential = await getGenericPassword({
-        accessControl: ACCESS_CONTROL.BIOMETRY_ANY,
-        authenticationPrompt: {
-          title: 'Login',
-          description: 'Login to secret note',
-        },
-        authenticationType: AUTHENTICATION_TYPE.BIOMETRICS,
-        accessible: ACCESSIBLE.ALWAYS,
-        service: 'biometric',
-      });
-
-      if (!credential) {
-        return;
-      }
-
-      const { username } = credential;
-
-      // Means user has been verified and no need to input username
-      attemptLogin(username);
-    } catch (error) {
-      console.error(error);
-
-      // do nothing
+    if (!credential) {
+      return;
     }
+
+    const { username } = credential;
+
+    // Means user has been verified and no need to input username
+    attemptLogin(username);
   }, [attemptLogin, biometryType]);
 
   useEffect(() => {

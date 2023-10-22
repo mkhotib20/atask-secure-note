@@ -14,7 +14,10 @@ jest.mock('react-native-keychain');
 
 const renderApp = () => {
   // make all test case encapsulated
-
+  const mockGetSupportedBiometryType = jest.spyOn(keychain, 'getSupportedBiometryType');
+  mockGetSupportedBiometryType.mockImplementation(() => {
+    return Promise.resolve(null);
+  });
   render(<App />);
 };
 

@@ -5,7 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { DEFAULT_BLACK, DEFAULT_WHITE } from '@/styles/colors';
 
-import { STRONG_PASSWORD_REGEX } from './models/constants';
+import { BIOMETRY_ICON, STRONG_PASSWORD_REGEX } from './models/constants';
 import PasswordInput from './preentation/PasswordInput';
 import styles from './styles';
 import usePasswordLogin from './usecase/usePasswordLogin';
@@ -15,15 +15,18 @@ const LoginScreen = () => {
 
   const [pwd, setPwd] = useState('');
 
+  const isPasswordStrong = useMemo(() => !pwd || STRONG_PASSWORD_REGEX.test(pwd), [pwd]);
+
   const handlePressLogin = () => {
+    if (!isPasswordStrong) {
+      return;
+    }
     if (!pwd) {
       Alert.alert('Please input password');
       return;
     }
     handleLogin(pwd);
   };
-
-  const isPasswordStrong = useMemo(() => !pwd || STRONG_PASSWORD_REGEX.test(pwd), [pwd]);
 
   return (
     <KeyboardAvoidingView behavior={Platform.select({ ios: 'padding', android: 'height' })}>
@@ -51,7 +54,7 @@ const LoginScreen = () => {
 
           {biometryType && (
             <Button onPress={authenticateBiometric} mode="text" style={styles.biometricBtn}>
-              <MaterialCommunityIcons size={20} name="face-recognition" />
+              <MaterialCommunityIcons size={20} name={BIOMETRY_ICON[biometryType]} />
             </Button>
           )}
         </View>

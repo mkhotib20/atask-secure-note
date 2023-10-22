@@ -9,13 +9,10 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react-nativ
 
 import App from '@/App';
 import { BCRYPTED_PASSWORD } from '@/__mock_data__/pwd';
-
-jest.mock('react-native-keychain');
+import mockBiometricType from '@/utils/mockBiometricType';
 
 const setupAndSimulateInput = async (userInput: string) => {
-  jest.spyOn(Alert, 'alert');
   render(<App />);
-
   const passwordInput = await screen.findByPlaceholderText('Input Password');
   expect(passwordInput).toBeOnTheScreen();
 
@@ -78,7 +75,6 @@ describe('Login Screen Test', () => {
   it('should show password not strong for weak password', async () => {
     await setupAndSimulateInput('weak');
     expect(await screen.findByText('Password is not strong enough')).toBeDefined();
-    expect(await screen.findByText('Login')).toBeDisabled();
   });
 
   it('Should show alert if user input wrong password', async () => {
@@ -106,9 +102,7 @@ describe('Login Screen Test', () => {
 
   it('Should show biometrics if deifned and logged in without password', async () => {
     const mockGetSupportedBiometryType = jest.spyOn(keychain, 'getSupportedBiometryType');
-    mockGetSupportedBiometryType.mockImplementation(async () => {
-      return keychain.BIOMETRY_TYPE.FINGERPRINT;
-    });
+    mockGetSupportedBiometryType.mockImplementation(mockBiometricType);
     render(<App />);
 
     expect(screen.queryByText('Create New')).toBeDefined();
@@ -121,9 +115,7 @@ describe('Login Screen Test', () => {
     });
 
     const mockGetSupportedBiometryType = jest.spyOn(keychain, 'getSupportedBiometryType');
-    mockGetSupportedBiometryType.mockImplementation(async () => {
-      return keychain.BIOMETRY_TYPE.FINGERPRINT;
-    });
+    mockGetSupportedBiometryType.mockImplementation(mockBiometricType);
 
     await setupAndSimulateInput('October2023');
     expect(screen.queryByText('Create New')).toBeDefined();
