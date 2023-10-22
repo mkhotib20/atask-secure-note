@@ -18,7 +18,7 @@ const LoginScreen = () => {
   };
 
   const isPasswordStrong = useMemo(() => !pwd || STRONG_PASSWORD_REGEX.test(pwd), [pwd]);
-  const isBtnEnabled = isPasswordStrong && pwd;
+  const isEnableToLogin = isPasswordStrong && pwd;
 
   return (
     <KeyboardAvoidingView behavior={Platform.select({ ios: 'padding', android: 'height' })}>
@@ -35,7 +35,7 @@ const LoginScreen = () => {
         <Button
           loading={loading}
           onPress={handlePressLogin}
-          disabled={loading || !isBtnEnabled}
+          disabled={loading || !isEnableToLogin}
           textColor={DEFAULT_WHITE}
           mode="contained"
           style={{ marginTop: 32, width: '100%' }}
