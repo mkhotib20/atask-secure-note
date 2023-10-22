@@ -39,7 +39,7 @@ const useNoteContent = () => {
         },
       ],
     });
-  }, [noteContent, noteTitle, data]);
+  }, [handleUpsert, noteContent, data.id, noteTitle, reset]);
 
   const deleteThisNote = useCallback(() => {
     Alert.alert('Confirmation', 'Are you sure want to delete this note?', [
@@ -64,7 +64,7 @@ const useNoteContent = () => {
         text: 'Yes',
       },
     ]);
-  }, [noteContent, noteTitle, data]);
+  }, [data.id, handleDelete, reset]);
 
   return {
     noteContent,

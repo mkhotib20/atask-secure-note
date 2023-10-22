@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import { TextInput, View } from 'react-native';
 
-import { DEFAULT_WHITE, LIGHTER_BLACK } from '@/styles/colors';
+import { LIGHTER_BLACK } from '@/styles/colors';
 
-import { styles } from './styles';
+import styles from './styles';
 import useHeaderOptions from './usecase/useHeaderOptions';
 import useNoteContent from './usecase/useNoteContent';
 
@@ -15,6 +15,7 @@ const EditorScreen = () => {
   const { handleSave, handleChangeContent, handleChangeTitle, deleteThisNote } = noteContentResult;
   // values
   const { isEdit, noteContent, noteTitle } = noteContentResult;
+  console.log('rerender check');
 
   useHeaderOptions({
     onSave: handleSave,
@@ -23,12 +24,7 @@ const EditorScreen = () => {
   });
 
   return (
-    <View
-      style={{
-        backgroundColor: DEFAULT_WHITE,
-        marginBottom: 72,
-      }}
-    >
+    <View style={styles.editorOuterWrapper}>
       <TextInput
         autoFocus
         value={noteTitle}

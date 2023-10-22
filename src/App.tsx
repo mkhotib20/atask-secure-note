@@ -21,6 +21,7 @@ const MainApp = () => {
             primary: PRIMARY_COLOR,
             error: 'red',
           },
+          roundness: 8,
         }}
       >
         <AuthProvider>

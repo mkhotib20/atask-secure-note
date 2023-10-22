@@ -13,25 +13,27 @@ const useNoteMutation = () => {
   /**
    * Return parsed type safe existing data
    */
-  const getParsedExisting = (): Note[] => {
+  const getParsedExisting = useCallback((): Note[] => {
     const existingStorage = get(NOTE_STORAGE_KEY);
     if (!existingStorage) {
       return [];
     }
     return JSON.parse(existingStorage);
-  };
-
+  }, [get]);
   /**
    * recursively generate unique uuid
    */
-  const getUniqueNewId = useCallback((tried: string[]): string => {
-    const existingStorage = getParsedExisting();
-    const generated = uuid.v4().toString();
-    if (existingStorage.find((note) => note.id === generated)) {
-      return getUniqueNewId([...(tried || []), generated]);
-    }
-    return generated;
-  }, []);
+  const getUniqueNewId = useCallback(
+    (tried: string[]): string => {
+      const existingStorage = getParsedExisting();
+      const generated = uuid.v4().toString();
+      if (existingStorage.find((note) => note.id === generated)) {
+        return getUniqueNewId([...(tried || []), generated]);
+      }
+      return generated;
+    },
+    [getParsedExisting],
+  );
 
   const handleUpsert = (noteData: UpsertNoteDto) => {
     const existingStorage = getParsedExisting();

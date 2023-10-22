@@ -5,6 +5,7 @@ import {
   ACCESSIBLE,
   ACCESS_CONTROL,
   AUTHENTICATION_TYPE,
+  BIOMETRY_TYPE,
   STORAGE_TYPE,
   getGenericPassword,
   getSupportedBiometryType,
@@ -17,15 +18,20 @@ import useAuth from '@/context/auth/hooks/useAuth';
 const usePasswordLogin = () => {
   const { attemptLogin } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [biometryType, setBiometryTypes] = useState<BIOMETRY_TYPE | null>(null);
+
+  useEffect(() => {
+    getSupportedBiometryType().then((result) => {
+      setBiometryTypes(result);
+    });
+  }, []);
 
   const handleNewUser = async (password: string) => {
-    const biometricResult = await getSupportedBiometryType();
-
     // Generate UUID for user unique encryption key
     const username = uuid.v4().toString();
     const hashedPassword = bcrypt.hashSync(password, 10);
     // Store to RSA for biometric, only if user has biometric support
-    if (biometricResult) {
+    if (biometryType) {
       await setGenericPassword(username, hashedPassword, {
         storage: STORAGE_TYPE.RSA,
         service: 'biometric',
@@ -71,9 +77,7 @@ const usePasswordLogin = () => {
   };
 
   const authenticateBiometric = useCallback(async () => {
-    const biometricResult = await getSupportedBiometryType();
-
-    if (!biometricResult) {
+    if (!biometryType) {
       return;
     }
 
@@ -98,15 +102,17 @@ const usePasswordLogin = () => {
       // Means user has been verified and no need to input username
       attemptLogin(username);
     } catch (error) {
+      console.error(error);
+
       // do nothing
     }
-  }, [attemptLogin]);
+  }, [attemptLogin, biometryType]);
 
   useEffect(() => {
     authenticateBiometric();
   }, [authenticateBiometric]);
 
-  return { handleLogin, loading };
+  return { biometryType, handleLogin, loading, authenticateBiometric };
 };
 
 export default usePasswordLogin;

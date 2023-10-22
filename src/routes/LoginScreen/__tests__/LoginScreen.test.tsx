@@ -1,6 +1,4 @@
-/**
- * @format
- */
+import React from 'react';
 import 'react-native';
 import { Alert } from 'react-native';
 import * as keychain from 'react-native-keychain';

@@ -5,13 +5,14 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { PRIMARY_COLOR } from '@/styles/colors';
 
 import type { HeaderRightProps } from '../../model/types';
+import styles from './styles';
 
 const HeaderRight = ({ onSave, isEdit, onDelete }: HeaderRightProps) => {
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <View style={styles.headerWrapper}>
       {isEdit && (
         <TouchableNativeFeedback testID="deleteButton" onPress={onDelete}>
-          <MaterialCommunityIcons style={{ marginRight: 32 }} color={PRIMARY_COLOR} name="delete-outline" size={24} />
+          <MaterialCommunityIcons style={styles.headerIcon} color={PRIMARY_COLOR} name="delete-outline" size={24} />
         </TouchableNativeFeedback>
       )}
       {/* need use test id because its icon */}

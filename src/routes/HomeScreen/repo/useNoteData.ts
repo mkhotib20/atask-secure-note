@@ -26,11 +26,13 @@ const useNoteData = () => {
     useCallback(() => {
       fetchData();
       setKeyword('');
-    }, []),
+    }, [fetchData]),
   );
 
   const parsedData = useMemo(() => {
-    if (!keyword) return noteData;
+    if (!keyword) {
+      return noteData;
+    }
     const loweredKeyword = keyword.toLowerCase();
     return noteData.filter(
       (note) =>

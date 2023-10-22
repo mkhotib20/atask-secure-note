@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { RootNavigationProp } from '@/models/router/types';
 import { PRIMARY_COLOR } from '@/styles/colors';
 
-import { styles } from './styles';
+import styles from './styles';
 
 const ScreenHeader = () => {
   const { push } = useNavigation<RootNavigationProp>();

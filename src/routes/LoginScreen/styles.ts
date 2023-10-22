@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { DEFAULT_WHITE } from '@/styles/colors';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   passwordWrapper: {
     backgroundColor: DEFAULT_WHITE,
     padding: 20,
@@ -11,4 +11,14 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
+  loginButton: {
+    flex: 1,
+    borderRadius: 8,
+  },
+  biometricBtn: {
+    borderRadius: 8,
+    marginLeft: 8,
+  },
 });
+
+export default styles;

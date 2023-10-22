@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 
-import { DEFAULT_BLACK } from '@/styles/colors';
+import { DEFAULT_BLACK, DEFAULT_WHITE } from '@/styles/colors';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   editorText: {
     height: '100%',
     color: DEFAULT_BLACK,
@@ -15,4 +15,10 @@ export const styles = StyleSheet.create({
     padding: 20,
     color: DEFAULT_BLACK,
   },
+  editorOuterWrapper: {
+    backgroundColor: DEFAULT_WHITE,
+    marginBottom: 72,
+  },
 });
+
+export default styles;

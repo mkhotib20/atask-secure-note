@@ -2,21 +2,14 @@ import React from 'react';
 import { TextInput, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { DARKER_WHITE, DEFAULT_BLACK, LIGHTER_BLACK } from '@/styles/colors';
+import { LIGHTER_BLACK } from '@/styles/colors';
 
 import { SearchBarProps } from '../../model/types';
+import styles from './styles';
 
 const SearchBar = ({ keyword, setKeyword }: SearchBarProps) => {
   return (
-    <View
-      style={{
-        backgroundColor: DARKER_WHITE,
-        borderRadius: 8,
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-      }}
-    >
+    <View style={styles.searchWrapper}>
       <TextInput
         keyboardType="web-search"
         value={keyword}
@@ -24,7 +17,7 @@ const SearchBar = ({ keyword, setKeyword }: SearchBarProps) => {
         returnKeyType="search"
         returnKeyLabel="search"
         placeholder="Search"
-        style={{ height: 48, flex: 1, color: DEFAULT_BLACK }}
+        style={styles.searchInput}
       />
       <MaterialCommunityIcons color={LIGHTER_BLACK} size={24} name="magnify" />
     </View>

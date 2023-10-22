@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 
-import { PRIMARY_COLOR } from '@/styles/colors';
+import { DEFAULT_WHITE, PRIMARY_COLOR } from '@/styles/colors';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   fabStyle: {
     position: 'absolute',
     margin: 16,
@@ -15,4 +15,16 @@ export const styles = StyleSheet.create({
     fontSize: 32,
     marginBottom: 32,
   },
+  outerWrapper: {
+    backgroundColor: DEFAULT_WHITE,
+    height: '100%',
+  },
+  upperWrapper: {
+    padding: 20,
+  },
+  listWrapper: {
+    paddingHorizontal: 20,
+  },
 });
+
+export default styles;

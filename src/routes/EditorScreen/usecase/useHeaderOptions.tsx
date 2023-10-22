@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,7 +14,7 @@ const useHeaderOptions = ({ onSave, isEdit, onDelete }: UseHeaderOptions) => {
         return <HeaderRight isEdit={isEdit} onSave={onSave} onDelete={onDelete} />;
       },
     });
-  }, [setOptions, onSave, onDelete]);
+  }, [setOptions, onSave, onDelete, isEdit]);
 };
 
 export default useHeaderOptions;
