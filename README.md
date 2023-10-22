@@ -9,25 +9,6 @@
 - If biometric authentication fails, you can enter the text password as a fallback option.
 - All notes are securely encrypted, ensuring they are never stored unencrypted.
 
-# Overall Project decision explanation
-
-1. Why using yarn?, We use Yarn as the package manager for this project because yarn is faster than npm
-
-2. Clean Code Architecture, This project follows Clean Code Architecture, which is a software design philosophy that promotes the separation of concerns and maintainability. Key principles include:
-
-   - Separation of Concerns: Clean Code Architecture separates different components of the app, making it easier to maintain and extend.
-   - Modularity: The codebase is divided into modules, each with its own responsibility, ensuring code is organized and maintainable.
-   - Testability: Clean Code Architecture encourages writing testable code, which improves the overall quality of the app.
-
-3. React Native Paper is chosen as the UI library for this project for several compelling reasons:
-   - High-Quality Components: React Native Paper provides a wide range of high-quality and customizable components, such as buttons, cards, dialogs, and more. This allows for the quick development of a polished and professional-looking user interface.
-   - Theming Support: It supports theming, enabling the customization of the app's appearance to match your specific branding and design preferences.
-   - Community and Maintenance: React Native Paper is actively maintained and has a vibrant community. This means that it's less likely to become outdated or encounter compatibility issues with future React Native updates.
-4. React Native Navigation is chosen as the navigation library for this project due to the following advantages:
-   - Native Performance: React Native Navigation is built with a focus on native performance, offering seamless transitions and an overall smoother user experience. It takes full advantage of native navigation components on both iOS and Android.
-   - Flexibility: The library provides great flexibility in terms of navigation patterns and transitions, allowing you to create a navigation structure tailored to your app's specific needs.
-   - Large User Base: Due to its popularity and extensive use in the community, you can find a wealth of resources, documentation, and community support, making it easier to troubleshoot issues and implement advanced navigation features.
-
 # Unit Test Coverage
 
 I was focused in login usecase test cases, it contains crucial business logic for authentication, and the business logic has been locked with unit test. This unit test is supposed to prevent unexpected logic changes when engineer modify the code
